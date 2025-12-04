@@ -1,19 +1,17 @@
 # Allure-Markdown
 
-Allure-Markdown是一个Python项目，能将Allure的元数据转换为Markdown格式的报告，不需要Java环境和Allure报告生成工具即可使用。
+Allure-Markdown 是一个 Python 项目，能将 Allure 的元数据转换为 Markdown 格式的报告。
 
 ## 功能特性
 
-- 将Allure JSON元数据转换为Markdown报告
-- 无需Java环境和Allure命令行工具
-- 支持pytest钩子自动生成报告
-- 提供命令行界面手动转换
-- 美观易读的Markdown输出格式
+- 将 Allure JSON 元数据转换为 Markdown 报告
+- 不需要安装 Allure 生成工具，更不需要 Java 环境
+- 支持 pytest 钩子自动生成报告
+- 提供命令行一键转换
+- 美观易读的 Markdown 输出格式
 
 ## 依赖
 
-- allure-pytest
-- pytest
 - jinja2
 - click
 
@@ -23,12 +21,6 @@ Allure-Markdown是一个Python项目，能将Allure的元数据转换为Markdown
 
 ```bash
 pip install allure-markdown
-```
-
-或使用poetry安装：
-
-```bash
-poetry add allure-markdown
 ```
 
 ## 使用方法
@@ -54,21 +46,21 @@ allure-markdown [OPTIONS]
 allure-markdown
 
 # 指定结果目录和输出文件
-allure-markdown -r my-allure-results -o my_report.md
+allure-markdown -r allure-results -o my_report.md
 
 # 自定义标题和描述
 allure-markdown -t "My Test Report" -d "This is my custom description"
 ```
 
-### 2. Pytest钩子使用
+### 2. Pytest 钩子使用
 
-在pytest命令中添加参数启用自动报告生成：
+在 pytest 命令中添加参数启用自动报告生成：
 
 ```bash
 pytest --alluredir=allure-results --allure-markdown-generate
 ```
 
-**可用的pytest参数：**
+**可用的 pytest 参数：**
 
 - `--allure-markdown-generate`: 测试会话结束后从Allure结果生成Markdown报告
 - `--allure-markdown-title`: 生成的Markdown报告标题
@@ -86,9 +78,9 @@ pytest --alluredir=allure-results --allure-markdown-generate
 pytest --alluredir=my-results --allure-markdown-generate --allure-markdown-title="My Test Report" --allure-markdown-output="test_report.md"
 ```
 
-## Markdown报告内容
+## Markdown 报告内容
 
-生成的Markdown报告包含以下部分：
+生成的 Markdown 报告包含以下部分：
 
 ```markdown
 # Title
@@ -109,28 +101,3 @@ pytest --alluredir=my-results --allure-markdown-generate --allure-markdown-title
 - **Environment**: 环境信息，从environment.properties文件读取
 - **Summary**: 测试汇总结果，包括通过、失败、跳过等统计
 - **Fail Details**: 失败测试的详细信息，包括错误信息、堆栈跟踪和附件
-
-## 基本原理
-
-1. 依赖allure-pytest生成的元数据（json文件及其附件）
-2. 扫描并读取allure的json结果数据
-3. 基于jinja2模板引擎生成markdown报告
-4. 提供命令行和pytest钩子两种调用方式
-
-## 项目结构
-
-```
-allure-markdown/
-├── allure_markdown/
-│   ├── utils/
-│   │   ├── parser.py         # Allure元数据解析
-│   │   └── report_generator.py  # Markdown报告生成
-│   ├── templates/
-│   │   └── report.md.j2      # Jinja2模板
-│   ├── cli.py                # 命令行界面
-│   ├── pytest_plugin.py      # Pytest插件
-│   └── __init__.py
-├── README.md
-├── LICENSE
-└── pyproject.toml
-```
