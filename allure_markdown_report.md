@@ -45,9 +45,11 @@ E       assert False
 tests\test_allure_simple.py:15: AssertionError
 ```
 **Attachments:**
+
 ```python
 Test log
 ```
+
 ###  test_simple_failed
 
 **Node ID:** tests.test_simple#test_simple_failed
@@ -109,7 +111,9 @@ E       assert False
 tests\test_comprehensive.py:51: AssertionError
 ```
 **Attachments:**
+
 ![测试截图](78efcf09-b11b-49d5-80ac-1b5fb55652ac-attachment.png)
+
 ###  test_with_video
 
 **Node ID:** tests.test_comprehensive#test_with_video
@@ -150,6 +154,7 @@ tests\test_comprehensive.py:67: AssertionError
 <video controls width="100%">
     <source src="d51a2056-50b4-4e11-8b8f-10204bd8258d-attachment.mp4" type="video/mp4">
 </video>
+
 ###  test_failed_with_error_details
 
 **Node ID:** tests.test_comprehensive#test_failed_with_error_details
@@ -198,12 +203,15 @@ E           assert False
 tests\test_comprehensive.py:34: AssertionError
 ```
 **Attachments:**
+
 ```python
 操作参数
 ```
+
 ```python
 错误信息
 ```
+
 ```python
 异常类型
 ```

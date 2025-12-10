@@ -45,13 +45,11 @@
 
 {%- if test.attachments %}
 **Attachments:**
-{%- for attachment in test.attachments %}
+{% for attachment in test.attachments %}
 {%- if attachment.type == 'video/mp4' %}
-
 <video controls width="100%">
     <source src="{{ attachment.path }}" type="video/mp4">
 </video>
-
 {%- elif attachment.type == 'image/png' %}
 ![{{ attachment.name }}]({{ attachment.path }})
 {%- else %}
@@ -59,7 +57,7 @@
 {{attachment.content}}
 ```
 {%- endif %}
-{%- endfor %}
+{% endfor %}
 {%- endif %}
 
 {%- endfor %}
