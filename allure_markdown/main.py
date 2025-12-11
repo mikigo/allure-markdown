@@ -4,7 +4,7 @@ import pathlib
 import shutil
 from typing import Tuple, List, Dict
 
-from jinja2 import Environment, PackageLoader, select_autoescape
+import jinja2
 
 from allure_markdown.config import config
 
@@ -21,7 +21,7 @@ class AllureMarkdown:
     ):
         self.results_dir = results_dir or config.results_dir
         if not pathlib.Path(self.results_dir).exists():
-            raise FileNotFoundError("Results directory does not exist")
+            raise FileNotFoundError(f"Results directory '{self.results_dir}' does not exist")
 
         self.output = output or config.output
         self.title = title or config.title
@@ -148,9 +148,9 @@ class AllureMarkdown:
             custom_content: str = None,
             output_path: str = None,
     ) -> None:
-        env = Environment(
-            loader=PackageLoader("allure_markdown", "templates"),
-            autoescape=select_autoescape()
+        env = jinja2.Environment(
+            loader=jinja2.PackageLoader("allure_markdown", config.templates_path.as_posix()),
+            autoescape=jinja2.select_autoescape()
         )
 
         template = env.get_template("report.md.j2")
@@ -172,10 +172,6 @@ class AllureMarkdown:
     def gen(self):
         print("Allure-Markdown: Converting Allure metadata to Markdown...")
 
-        if not os.path.exists(self.results_dir):
-            print(f"Error: Results directory '{self.results_dir}' not found.")
-            return 1
-
         try:
             test_results, environment = self.scan_allure_results()
 
@@ -194,8 +190,6 @@ class AllureMarkdown:
                 custom_content=self.custom_content,
                 output_path=self.output
             )
-
-            print(f"Success: Markdown report generated at '{self.output}'")
             return 0
 
         except Exception as e:
